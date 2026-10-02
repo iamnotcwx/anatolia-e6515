@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>安纳托利亚九千年 × 你们的 9 天 · E6515 初遇土耳其</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="wrap">
+
+  <header class="site">
+    <div class="kicker">Anatolia × 9 Days · E6515</div>
+    <h1>安纳托利亚九千年 × 你们的 9 天</h1>
+    <p class="sub">以西方史为坐标，把每一天要走的土地放回历史地图里 · 稻草人 Plus 初遇土耳其 · 集合 10/3 · 解散 10/11</p>
+  </header>
+
+  <nav class="topnav">
+    <button data-v="history" class="on">历史总览</button>
+    <button data-v="days">每日详解</button>
+  </nav>
+
+  <main>
+    <!-- 历史总览视图 -->
+    <section id="view-history" class="view on">
+      <p class="tl-tip">滑动时间轴切换时期 · 各时期疆域全图 / 行程路线见下方</p>
+      <div id="timeline"></div>
+      <div id="periodDetail"></div>
+    </section>
+
+    <!-- 每日详解视图 -->
+    <section id="view-days" class="view">
+      <div id="dayNav"></div>
+      <div id="dayTitle"></div>
+      <div id="daySchedule"></div>
+      <div id="dayHistory"></div>
+      <div id="dayExtra"></div>
+    </section>
+  </main>
+
+  <footer class="site">所有实景照片来自 Wikimedia Commons，按原许可证使用，署名见各图注 · 攻略配套文件：《土耳其9天完整攻略.pdf》《每日速览.html》《打印一页.html》</footer>
+
+</div>
+
+<script src="assets/credits.js"></script>
+<script src="data-history.js"></script>
+<script src="data-schedule.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

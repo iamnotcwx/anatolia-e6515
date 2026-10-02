@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>打印一页 · 安纳托利亚 9 天全图速查</title>
+<style>
+  :root{
+    --paper:#FBFAF7; --ink:#1B1812; --sub:#6E6759; --faint:#9A927F;
+    --line:#DDD7C8; --red:#B3342A;
+    --serif:"Songti SC","STSong",Georgia,"Times New Roman",serif;
+    --sans:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    --mono:"SF Mono",ui-monospace,Menlo,Consolas,monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{background:#E9E5DA;color:var(--ink);font-family:var(--sans);
+       -webkit-font-smoothing:antialiased;font-size:12px;line-height:1.55;
+       -webkit-print-color-adjust:exact;print-color-adjust:exact}
+
+  .sheet{width:297mm;height:210mm;margin:16px auto;background:var(--paper);
+         padding:10mm 12mm;display:flex;flex-direction:column;gap:4mm;
+         box-shadow:0 2px 18px rgba(0,0,0,.18)}
+
+  /* ---- 页眉 ---- */
+  header{display:flex;align-items:baseline;justify-content:space-between;
+         border-bottom:1.5px solid var(--ink);padding-bottom:2.2mm}
+  .kick{font-family:var(--mono);font-size:8px;letter-spacing:.22em;color:var(--sub);text-transform:uppercase}
+  h1{font-family:var(--serif);font-size:21px;font-weight:600;letter-spacing:.02em}
+  .meta{font-family:var(--mono);font-size:8.5px;color:var(--sub);letter-spacing:.08em;text-align:right;line-height:1.7}
+  .meta b{color:var(--red);font-weight:600}
+
+  /* ---- 全图 ---- */
+  .mapwrap{position:relative;border:1px solid var(--line);background:#fff;flex:none}
+  .mapwrap img{display:block;width:100%}
+  .mapwrap svg{position:absolute;inset:0;width:100%;height:100%}
+  .mapfoot{display:flex;justify-content:space-between;margin-top:1.6mm;
+           font-size:8.5px;color:var(--sub)}
+  .mapfoot .r{color:var(--red)}
+
+  /* ---- 航班条 ---- */
+  .flights{display:flex;gap:6mm;border-bottom:1px solid var(--line);padding-bottom:1.8mm}
+  .flights .f{flex:1;display:flex;gap:2.2mm;align-items:baseline;font-size:9px}
+  .flights .d{font-family:var(--mono);font-size:8px;color:var(--red);white-space:nowrap;letter-spacing:.06em}
+  .flights .t{color:var(--sub)}
+
+  /* ---- 九天格 ---- */
+  .days{flex:1;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:0}
+  .day{border-right:1px solid var(--line);border-bottom:1px solid var(--line);
+       padding:1.8mm 3mm;overflow:hidden;display:flex;flex-direction:column;gap:1mm}
+  .day:nth-child(3n){border-right:none}
+  .day:nth-child(n+7){border-bottom:none}
+  .day .dh{display:flex;align-items:baseline;gap:2mm}
+  .day .dn{font-family:var(--mono);font-size:9.5px;font-weight:700;color:var(--red)}
+  .day .dt{font-family:var(--mono);font-size:8px;color:var(--faint)}
+  .day .dm{font-family:var(--serif);font-size:12px;font-weight:600}
+  .day ul{list-style:none;font-size:9px;line-height:1.5;color:var(--ink)}
+  .day li{padding-left:2.6mm;position:relative}
+  .day li::before{content:"—";position:absolute;left:0;color:var(--red);font-size:8px}
+  .day li.s::before{color:var(--faint)}
+  .day li.hotel{margin-top:auto;color:var(--sub);font-size:8.5px}
+  .day li.hotel::before{content:"住";color:var(--faint);font-size:8px}
+
+  footer{flex:none;display:flex;justify-content:space-between;border-top:1.5px solid var(--ink);
+         padding-top:1.6mm;font-size:8px;color:var(--faint);font-family:var(--mono);letter-spacing:.06em}
+
+  @media print{
+    @page{size:A4 landscape;margin:0}
+    body{background:var(--paper)}
+    .sheet{margin:0;box-shadow:none}
+  }
+  @media(max-width:900px){
+    body{background:var(--paper)}
+    .sheet{width:100%;height:auto;min-height:100vh;margin:0;box-shadow:none;padding:16px}
+    .days{grid-template-columns:1fr;grid-template-rows:none}
+    .day{border-bottom:1px solid var(--line)!important;border-right:none!important;padding:10px 2px}
+    .flights{flex-direction:column;gap:4px}
+    header h1{font-size:18px}
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <header>
+    <div>
+      <div class="kick">ANATOLIA × 9 DAYS · E6515</div>
+      <h1>安纳托利亚九千年 · 全程一图速查</h1>
+    </div>
+    <div class="meta">
+      稻草人 Plus 初遇土耳其 · 两人<br>
+      集合 <b>10/3</b> 伊斯坦布尔 IST 14:25 落地 · 解散 <b>10/11</b> EK0122 19:35 起飞<br>
+      全程约 2400 公里环线 · 7 晚 8 城
+    </div>
+  </header>
+
+  <div>
+    <div class="mapwrap">
+      <img src="土耳其历史图集/assets/img/base-map.png" alt="土耳其全图">
+      <svg viewBox="0 0 1579.4531 677.31348" preserveAspectRatio="none" aria-label="行程路线"></svg>
+    </div>
+    <div class="mapfoot">
+      <span><span class="r">— —</span> 行程环线（含内飞段）　<span class="r">●</span> 红点 = 过夜/途经城市</span>
+      <span>数字 = 行程日（D1–D9）</span>
+    </div>
+  </div>
+
+  <div class="flights">
+    <div class="f"><span class="d">去程 10/3</span><span>EK0311 00:10 杭州 → 迪拜 + EK0123 10:40 → <b>14:25 抵 IST</b></span></div>
+    <div class="f"><span class="d">内陆 10/4</span><span class="t">伊斯坦布尔 → 卡帕多奇亚团队内飞（晚班，时刻以 Giver 通知为准）</span></div>
+    <div class="f"><span class="d">回程 10/11</span><span>EK0122 <b>19:35 IST 起飞</b> → 迪拜 → 10/12 15:55 抵杭</span></div>
+  </div>
+
+  <div class="days" id="days"></div>
+
+  <footer>
+    <span>路书：home.54traveler.com/detail/E6515 · 本页信息以路书与 Giver 行前通知为准</span>
+    <span>自行安排/推荐见交互版图集 · A4 横向打印</span>
+  </footer>
+
+</div>
+
+<script>
+// 底图 SVG 像素空间（与图集校准一致）
+const X = lon => (lon - 25.5) / 20 * 1579.4531;
+const Y = lat => (42.5 - lat) / 7 * 677.31348;
+
+const ROUTE = [
+  [28.98,41.01],[34.83,38.64],[32.48,37.87],[30.71,36.89],[29.85,36.19],
+  [29.12,36.65],[29.09,37.78],[27.60,37.93],[27.36,37.94],[27.14,38.42],
+  [29.06,40.19],[28.98,41.01]
+];
+const CITIES = [
+  {n:'伊斯坦布尔',d:'D1·D2·D9',lon:28.98,lat:41.01},
+  {n:'布尔萨',d:'D8·D9',lon:29.06,lat:40.19},
+  {n:'伊兹密尔',d:'D7·D8',lon:27.14,lat:38.42,anchor:'end',dx:-12,dy:-6},
+  {n:'以弗所',d:'D7',lon:27.36,lat:37.94,dy:38},
+  {n:'希林杰',d:'D7',lon:27.60,lat:37.93,dy:-34},
+  {n:'棉花堡',d:'D6·D7',lon:29.09,lat:37.78},
+  {n:'费特希耶',d:'D5·D6',lon:29.12,lat:36.65,dy:38},
+  {n:'凯科瓦',d:'D5',lon:29.85,lat:36.19,dy:-34},
+  {n:'安塔利亚',d:'D4·D5',lon:30.71,lat:36.89},
+  {n:'孔亚',d:'D4 途经',lon:32.48,lat:37.87},
+  {n:'卡帕多奇亚',d:'D2·D3',lon:34.83,lat:38.64},
+  {n:'安卡拉',d:'途经',lon:32.86,lat:39.93}
+];
+
+const routePts = ROUTE.map(p => `${X(p[0]).toFixed(1)},${Y(p[1]).toFixed(1)}`).join(' ');
+const dots = CITIES.map(c => {
+  const dx = c.dx||0, dy = c.dy||0, a = c.anchor||'middle';
+  return `<g transform="translate(${X(c.lon).toFixed(1)},${Y(c.lat).toFixed(1)})">
+    <circle r="7" fill="#B3342A" stroke="#fff" stroke-width="2.5"></circle>
+    <text x="${dx}" y="${-13+dy}" font-size="21" text-anchor="${a}" fill="#1B1812" font-weight="bold"
+      stroke="#FBFAF7" stroke-width="4" paint-order="stroke" style="pointer-events:none">${c.n}</text>
+    <text x="${dx}" y="${30+dy}" font-size="16" text-anchor="${a}" fill="#B3342A" font-weight="bold"
+      stroke="#FBFAF7" stroke-width="3.5" paint-order="stroke" style="pointer-events:none">${c.d}</text>
+  </g>`;
+}).join('');
+document.querySelector('.mapwrap svg').innerHTML =
+  `<polyline points="${routePts}" fill="none" stroke="#B3342A" stroke-width="4"
+    stroke-dasharray="12 8" stroke-opacity=".7" stroke-linecap="round" stroke-linejoin="round"></polyline>` + dots;
+
+// 九天格：一级信息（三餐+游玩），交通/住宿小字弱化
+const DAYS = [
+  {dn:'D1',dt:'10/3',dm:'伊斯坦布尔 · 集合日',items:[
+    '14:25 落地 IST，赴 Beyoğlu 酒店',
+    '傍晚自由：加拉塔塔 / 独立大街',
+    '18:00 自约晚餐 · 晚 Giver 准备会'],
+    hotel:'The Marmara Pera'},
+  {dn:'D2',dt:'10/4',dm:'伊斯坦布尔 → 内飞卡帕',items:[
+    '竞技场遗址 → 圣索菲亚入内',
+    '轮渡跨博斯普鲁斯 → Kadıköy',
+    '晚餐自行安排（老城）· 夜飞卡帕'],
+    hotel:'Hanedan Cappadocia Suites'},
+  {dn:'D3',dt:'10/5',dm:'卡帕多奇亚 · 秘径与家宴',items:[
+    '清晨热气球（自费自选）',
+    '格雷梅露天博物馆 + 小镇',
+    '红谷秘径徒步 · 晚洞穴家宴'],
+    hotel:'连住 Hanedan（Mustafapaşa）'},
+  {dn:'D4',dt:'10/6',dm:'卡帕 → 安塔利亚',items:[
+    '550km 横穿中部（约 7.5h）',
+    '孔亚长 Pide 午餐 · 木清真寺',
+    '傍晚老城：哈德良门 → 罗马港'],
+    hotel:'Ramada Plaza Antalya'},
+  {dn:'D5',dt:'10/7',dm:'凯科瓦出海 → 费特希耶',items:[
+    'D400 海景公路（约 170km）',
+    '包船出海：沉没之城 + Simena',
+    '船上午餐 · 晚抵费特希耶'],
+    hotel:'Marina Boutique Hotel'},
+  {dn:'D6',dt:'10/8',dm:'费特希耶 → 棉花堡',items:[
+    '自由上午：泻湖 / 滑翔伞',
+    '午后赴棉花堡（约 195km）',
+    '钙化池 + 希拉波利斯日落'],
+    hotel:'Doğa Thermal（Karahayıt）'},
+  {dn:'D7',dt:'10/9',dm:'以弗所 → 伊兹密尔',items:[
+    '希林杰小镇：果酒 + 甜品',
+    '以弗所古城（身份卡片游戏）',
+    '晚爱琴海自由：Kordon 日落'],
+    hotel:'Grand Hyatt Izmir'},
+  {dn:'D8',dt:'10/10',dm:'伊兹密尔 → 布尔萨',items:[
+    '上午可选：凯梅拉尔蒂老巴扎',
+    '346km 赴奥斯曼旧都',
+    '乌鲁清真大寺 · 晚旋转舞仪式'],
+    hotel:'Holiday Inn Bursa'},
+  {dn:'D9',dt:'10/11',dm:'布尔萨 → 伊斯坦布尔',items:[
+    '约 11:00 抵 IST 送机',
+    '白天自由（19:35 起飞）',
+    '建议提前 3 小时到机场'],
+    hotel:'—'}
+];
+document.getElementById('days').innerHTML = DAYS.map(d => `
+  <div class="day">
+    <div class="dh"><span class="dn">${d.dn}</span><span class="dt">${d.dt}</span></div>
+    <div class="dm">${d.dm}</div>
+    <ul>${d.items.map(i => `<li>${i}</li>`).join('')}<li class="hotel">${d.hotel}</li></ul>
+  </div>`).join('');
+</script>
+</body>
+</html>
